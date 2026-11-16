@@ -55,6 +55,6 @@ jobs:
           name: dist-file
           path: dist
       - name: build output
-        run: echo "Build output file names: ${{ needs.build.outputs.file-name }}"
+        run: echo "Build output file names ${{ needs.build.outputs.file-name }}"
       - name: Output contents
         run: ls -R dist

@@ -31,3 +31,12 @@ Downloads an artifact that was previously uploaded, allowing another job to use 
 
 
 Here, name: my-app tells GitHub which artifact to download.
+
+In GitHub Actions, job outputs are values that one job makes available to another job in the same workflow.
+
+Think of them as a way for jobs to pass small pieces of information to each other.
+Example
+Imagine you have two jobs:
+- Job 1 – Build: Generates a version number.
+- Job 2 – Deploy: Needs that version number to deploy the correct build.
+The build job can expose the version number as an output, and the deploy job can read it.
