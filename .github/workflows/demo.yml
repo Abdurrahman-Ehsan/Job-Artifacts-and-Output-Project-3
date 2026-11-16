@@ -25,6 +25,8 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
+    outputs:
+      file-name: $ {{steps.s4.outputs.file-names}}
     steps:
       - name: Get code
         uses: actions/checkout@v7
@@ -40,7 +42,9 @@ jobs:
         with:
           name: dist-file
           path: dist
-
+      - name : job output of file js file name
+        id: s4
+        run: echo "file-names=$(ls dist)" >> $GITHUB_OUTPUT
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -50,6 +54,7 @@ jobs:
         with:
           name: dist-file
           path: dist
-
+      - name: build output
+        run: echo "Build output file names: ${{ needs.build.outputs.file-name }}"
       - name: Output contents
         run: ls -R dist
