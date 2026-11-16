@@ -44,7 +44,7 @@ jobs:
           path: dist
       - name : job output of file js file name
         id: s4
-        run: echo "file-names=$(ls dist)" >> $GITHUB_OUTPUT
+        run: echo "file-names=$(find dist -type f -name '*.js' | xargs basename)" >> $GITHUB_OUTPUT
   deploy:
     needs: build
     runs-on: ubuntu-latest
