@@ -40,3 +40,25 @@ Imagine you have two jobs:
 - Job 1 – Build: Generates a version number.
 - Job 2 – Deploy: Needs that version number to deploy the correct build.
 The build job can expose the version number as an output, and the deploy job can read it.
+
+Dependency caching in GitHub Actions means saving downloaded project dependencies so that future workflow runs can reuse them instead of downloading everything again.
+
+It helps make workflows faster and more efficient.
+GitHub provides the actions/cache action.
+
+
+hashFiles() is a GitHub Actions function that calculates a hash (a unique-looking fingerprint) based on the contents of the specified file.
+
+For example:
+
+Imagine your package-lock.json initially contains dependencies for:
+- React
+- Express
+- Axios
+GitHub calculates a hash and uses it to create a cache key.
+Now suppose you add another dependency, such as Lodash.
+
+The contents of package-lock.json change, so its hash changes.
+
+The resulting cache key will also change.
+This means GitHub will not mistake the old dependency cache for an exact match to the new dependency set.
